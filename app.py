@@ -1,9 +1,13 @@
 import nltk
 from nltk import FreqDist
 from nltk.tokenize import sent_tokenize
+import numpy
 
 
 def get_words(text, lower=False):
+    """Returns word tokens from the text, optionally
+    in lowercase."""
+
     tokens = nltk.tokenize.word_tokenize(text)
     if lower:
         return [word.lower() for word in tokens]
@@ -12,10 +16,17 @@ def get_words(text, lower=False):
 
 
 def get_fdist(text):
+    """Returns the frequency distribution for lowercase
+    words in the text argument"""
+
     return FreqDist(get_words(text, lower=True))
 
 
 def analyze_words(text):
+    """Returns a dict of word-dict pairs, where
+    the associated dict contains the count and POS-
+    tag for the word."""
+
     words = get_words(text)
     pos_tags = nltk.pos_tag(words)
 
@@ -33,6 +44,11 @@ def analyze_words(text):
 
 
 def analyze_sentences(text):
+    """Returns a dict of sentence-dict pairs,
+    where the associated dict contains the sentence
+    length and lists of common and uncommon words
+    appearing in the sentence"""
+
     sent_tokens = sent_tokenize(text)
 
     fdist = get_fdist(text)
@@ -65,13 +81,23 @@ def analyze_sentences(text):
 
 
 def analyze_text(text):
+    """Returns the average relative sentence length
+    difference between one sentence to the next for all
+    the sentences in the text."""
     sent_tokens = sent_tokenize(text)
     previous_sentence_len = len(sent_tokens[0])
-    score = 0
 
+    sentence_diffs = []
     for sentence in sent_tokens:
         curr_sentence_len = len(sentence)
-        score += abs(curr_sentence_len - previous_sentence_len)
 
-    return score
+        # Get the relative length difference from previous
+        # sentence
+        relative_diff = (curr_sentence_len - previous_sentence_len) \
+                        / previous_sentence_len
+        sentence_diffs.append(abs(relative_diff))
+
+    # Return the mean of all sentence_diffs for an indicator
+    # of sentence length variance.
+    return numpy.mean(sentence_diffs)
 

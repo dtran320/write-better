@@ -4,7 +4,7 @@ from nltk import FreqDist
 def analyze_words(text):
     tokens = nltk.tokenize.word_tokenize(text)
     pos_tags = nltk.pos_tag(tokens)
-    fdist = FreqDist(text)
+    fdist = FreqDist(tokens)
 
     result_dict = {}
 
@@ -15,3 +15,6 @@ def analyze_words(text):
         }
 
     return result_dict
+
+def analyze_sentences(text):
+    pass

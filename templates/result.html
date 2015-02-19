@@ -4,6 +4,33 @@
 <p>Score: <em>{{sent_variance}}</em></p>
 <p>The score indicates the average relative difference in the whole text between each sentence. A low value here might indicate a monotonous writing style.</p>
 
+<h2>Sentence information</h2>
+<table class="results">
+<tr>
+    <th>Sentence</th>
+    <th>Length</th>
+    <th>Common words</th>
+    <th>Uncommon words</th>
+</tr>
+{% for sentence, result in sentence_results.items() %}
+<tr>
+    <td>{{sentence}}</td>
+    <td>{{result.length}}</td>
+    <td>
+        {% for word in result.common_words %}
+            {{word}}, 
+        {% endfor %}
+    </td>
+    <td>
+        {% for word in result.uncommon_words %}
+            {{word}}, 
+        {% endfor %}
+    </td>
+</tr>
+{% endfor %}
+</table>
+<br/>
+
 <h2>Word frequencies</h2>
 <table class="results">
 <tr>

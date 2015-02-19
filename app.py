@@ -55,8 +55,8 @@ def analyze_sentences(text):
     n_of_words = fdist.N()
 
     # Get the frequency of the word at the top 25% of fdist
-    common_word_threshold = fdist.freq(fdist.most_common(n_of_words // 4)[-1])
-    uncommon_word_threshold = 5 # TODO: Get bottom 25% threshold
+    common_word_threshold = fdist[fdist.most_common(n_of_words // 4)[-1][0]]
+    uncommon_word_threshold = 2 # TODO: Get bottom 25% threshold
 
     result_dict = {}
 

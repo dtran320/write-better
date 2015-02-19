@@ -24,7 +24,7 @@ def analyze():
         text = Markup(lxml.html.tostring(
             cleaner.clean_html(lxml.html.parse(url)))).striptags()
 
-    result = analyze_words(text)
+    result = analyze_words(text, True)
     sent_results = analyze_sentences(text)
     sent_variance = analyze_text(text)
     return render_template('result.html',

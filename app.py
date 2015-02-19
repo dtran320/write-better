@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 import nltk
 from nltk import FreqDist
 from nltk.tokenize import sent_tokenize
@@ -22,10 +24,14 @@ def get_fdist(text):
     return FreqDist(get_words(text, lower=True))
 
 
-def analyze_words(text):
+def analyze_words(text, ordered=False):
     """Returns a dict of word-dict pairs, where
     the associated dict contains the count and POS-
-    tag for the word."""
+    tag for the word.
+
+    If ordered is specified, then return an OrderedDict
+    sorted by count.
+    """
 
     words = get_words(text)
     pos_tags = nltk.pos_tag(words)
@@ -40,6 +46,10 @@ def analyze_words(text):
             'pos_tag': word_type
         }
 
+    if ordered:
+        result_dict = OrderedDict(
+            sorted(result_dict.items(), key=lambda t: t[1]['count'],
+                   reverse=True))
     return result_dict
 
 

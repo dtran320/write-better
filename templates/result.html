@@ -1,0 +1,16 @@
+{% block body %}
+<table>
+<tr>
+	<th>Word</th>
+	<th>Count</th>
+	<th>Part of Speech</th>
+</tr>
+{% for word, result in results.items() %}
+<tr>
+	<td>{{word}}</td>
+	<td>{{result.count}}</td>
+	<td>{{result.pos_tag}}</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

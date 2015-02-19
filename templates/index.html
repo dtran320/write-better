@@ -1,0 +1,8 @@
+{% block body %}
+
+<form action="{{ url_for('analyze') }}" method="post">
+<textarea name="text"></textarea>
+<input type="submit" />
+</form>
+
+{% endblock %}

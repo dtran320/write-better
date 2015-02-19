@@ -1,5 +1,6 @@
 import nltk
 from nltk import FreqDist
+from nltk.tokenize import sent_tokenize
 
 def analyze_words(text):
     tokens = nltk.tokenize.word_tokenize(text)
@@ -17,4 +18,14 @@ def analyze_words(text):
     return result_dict
 
 def analyze_sentences(text):
-    pass
+    sent_tokens = sent_tokenize(text)
+    result_dict = {}
+    for sentence in sent_tokens:
+        result_dict[sentence] = {
+            'length': len(sentence),
+            'common_words': [],
+            'uncommon_words': []
+        }
+        
+    return result_dict
+

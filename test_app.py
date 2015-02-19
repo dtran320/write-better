@@ -12,8 +12,8 @@ class TestWriteBetter(unittest.TestCase):
 
     def test_analyze_words_obama(self):
         results = analyze_words(self.test_corpus)
-        self.assertEquals(results[u'america']['count'], 10)
-        self.assertEquals(results[u'america']['pos_tag'], 'NN')
+        self.assertEquals(results[u'America']['count'], 10)
+        self.assertEquals(results[u'America']['pos_tag'], 'NNP')
 
     def test_analyze_words_simple(self):
         results = analyze_words("Hi hi hello")

@@ -3,7 +3,9 @@ from nltk import FreqDist
 from nltk.tokenize import sent_tokenize
 
 def get_words(text):
-    tokens = nltk.tokenize.word_tokenize(text)
+    return nltk.tokenize.word_tokenize(text)
+
+def lower_tokens(tokens):
     return [word.lower() for word in tokens]
 
 def get_fdist(text):
@@ -12,13 +14,13 @@ def get_fdist(text):
 def analyze_words(text):
     words = get_words(text)
     pos_tags = nltk.pos_tag(words)
-    fdist = FreqDist(words)
+    fdist = FreqDist(lower_tokens(words))
 
     result_dict = {}
 
     for word, word_type in pos_tags:
         result_dict[word] = {
-            'count': fdist[word],
+            'count': fdist[word.lower()],
             'pos_tag': word_type
         }
 
@@ -37,7 +39,7 @@ def analyze_sentences(text):
     for sentence in sent_tokens:
         common_words = []
         uncommon_words = []
-        words = get_words(sentence)
+        words = lower_tokens(get_words(sentence))
 
         for word in words:
             if fdist[word] > common_word_threshold:

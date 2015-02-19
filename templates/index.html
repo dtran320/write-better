@@ -1,7 +1,9 @@
+{% extends 'layout.html' %}
 {% block body %}
 
 <form action="{{ url_for('analyze') }}" method="post">
-<textarea name="text"></textarea>
+<textarea name="text" class="text-to-tag"></textarea>
+<br/>
 <input type="submit" />
 </form>
 

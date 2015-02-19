@@ -1,5 +1,6 @@
+{% extends 'layout.html' %}
 {% block body %}
-<table>
+<table class="results">
 <tr>
 	<th>Word</th>
 	<th>Count</th>
@@ -13,4 +14,6 @@
 </tr>
 {% endfor %}
 </table>
+<br/>
+<a href="{{ url_for('index') }}">Back</a>
 {% endblock %}

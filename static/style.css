@@ -1,0 +1,28 @@
+textarea.text-to-tag {
+	width: 600px;
+	height: 120px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+}
+
+table.results, table.results th, table.results td {
+	border-collapse: collapse;
+	border: 1px #cccccc solid;
+	text-align: left;
+}
+
+table.results th, table.results td {
+	padding: 5px;
+}
+
+table.results tr:nth-child(even) {
+	background: #ffffff;
+}
+
+table.results tr:nth-child(odd) {
+	background: #EAF2D3;
+}
+
+table.results th {
+	font-weight: bold;
+}

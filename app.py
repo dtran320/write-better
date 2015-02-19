@@ -65,7 +65,6 @@ def analyze_sentences(text):
     n_of_words = fdist.N()
 
     # Get the frequency of the word at the top 25% of fdist
-    
     common_words = fdist.most_common(n_of_words // 4)
     if len(common_words) > 0:
         common_word_threshold = fdist[common_words[-1][0]]
@@ -100,6 +99,7 @@ def analyze_text(text):
     """Returns the average relative sentence length
     difference between one sentence to the next for all
     the sentences in the text."""
+
     sent_tokens = sent_tokenize(text)
     previous_sentence_len = len(sent_tokens[0])
 

@@ -1,2 +1,2 @@
-web: gunicorn writebetter:app --log-file=-
+web: gunicorn write_better:app --log-file=-
 

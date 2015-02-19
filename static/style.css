@@ -26,3 +26,7 @@ table.results tr:nth-child(odd) {
 table.results th {
 	font-weight: bold;
 }
+
+input.url-to-tag {
+	width: 600px;
+}

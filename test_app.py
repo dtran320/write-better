@@ -6,8 +6,11 @@ from app import analyze_words, analyze_text
 
 class TestWriteBetter(unittest.TestCase):
 
-    def setUp(self):
+    @classmethod
+    def setUpClass(cls):
         nltk.download('inaugural')
+
+    def setUp(self):
         self.test_corpus = inaugural.raw('2009-Obama.txt')
 
     def test_analyze_words_obama(self):

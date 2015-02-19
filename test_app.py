@@ -2,7 +2,7 @@ import nltk
 from nltk.corpus import inaugural
 import unittest
 
-from app import analyze_words
+from app import analyze_words, analyze_text
 
 class TestWriteBetter(unittest.TestCase):
 
@@ -21,6 +21,10 @@ class TestWriteBetter(unittest.TestCase):
         self.assertEquals(results[u'hello']['count'], 1)
         self.assertEquals(results[u'hi']['pos_tag'], 'NN')
         self.assertEquals(results[u'hello']['pos_tag'], 'NN')
+
+    def test_analyze_text(self):
+        score = analyze_text(self.test_corpus)
+        self.assertTrue(score > 0)
 
 if __name__ == '__main__':
     unittest.main()

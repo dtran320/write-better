@@ -95,7 +95,10 @@ def analyze_text(text):
         # sentence
         relative_diff = (curr_sentence_len - previous_sentence_len) \
                         / previous_sentence_len
+
         sentence_diffs.append(abs(relative_diff))
+
+        previous_sentence_len = curr_sentence_len
 
     # Return the mean of all sentence_diffs for an indicator
     # of sentence length variance.

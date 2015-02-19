@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 
-from app import analyze_words
+from app import analyze_words, analyze_text
 
 app = Flask(__name__)
 app.debug = True
@@ -13,8 +13,13 @@ def index():
 
 @app.route('/analyze', methods=['POST'])
 def analyze():
-    result = analyze_words(request.form['text'])
-    return render_template('result.html', results=result)
+    text = request.form['text']
+    result = analyze_words(text)
+    sent_variance = analyze_text(text)
+    return render_template('result.html',   
+        results=result,
+        sent_variance= sent_variance,
+    )
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ import unittest
 
 from app import analyze_words, analyze_text
 
+
 class TestWriteBetter(unittest.TestCase):
 
     @classmethod
@@ -28,6 +29,7 @@ class TestWriteBetter(unittest.TestCase):
     def test_analyze_text(self):
         score = analyze_text(self.test_corpus)
         self.assertTrue(score > 0)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -2,6 +2,7 @@ import nltk
 from nltk import FreqDist
 from nltk.tokenize import sent_tokenize
 
+
 def get_words(text, lower=False):
     tokens = nltk.tokenize.word_tokenize(text)
     if lower:
@@ -9,8 +10,10 @@ def get_words(text, lower=False):
     else:
         return tokens
 
+
 def get_fdist(text):
     return FreqDist(get_words(text, lower=True))
+
 
 def analyze_words(text):
     words = get_words(text)
@@ -27,6 +30,7 @@ def analyze_words(text):
         }
 
     return result_dict
+
 
 def analyze_sentences(text):
     sent_tokens = sent_tokenize(text)
@@ -58,6 +62,7 @@ def analyze_sentences(text):
         }
 
     return result_dict
+
 
 def analyze_text(text):
     sent_tokens = sent_tokenize(text)

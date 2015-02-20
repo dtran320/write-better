@@ -54,8 +54,14 @@ Here are your results!
 </table>
 <br/>
 
-<h2>Word frequencies</h2>
-<table class="table table-striped">
+<h2>Word Frequencies</h2>
+<div class="form-group">
+    <label for="select-pos-tag">Part of Speech Tag</label>
+    <select name="pos-tag" id="select-pos-tag" class="form-control">
+        <option value="all">All</option>
+    </select>
+</div>
+<table class="table table-striped" id="word-frequency-table">
 <thead>
     <tr>
         <th>Word</th>

@@ -6,6 +6,10 @@ from nltk.tokenize import sent_tokenize
 import numpy
 
 
+COMMON_THRESH = 0.1
+UNCOMMON_THRESH = 0.9
+
+
 def get_words(text, lower=False):
     """Returns word tokens from the text, optionally
     in lowercase."""
@@ -22,6 +26,45 @@ def get_fdist(text):
     words in the text argument"""
 
     return FreqDist(get_words(text, lower=True))
+
+
+def get_word_frequency_at(fdist, percentage):
+    """Returns the frequency of the word at the given
+    percentile in the word frequency distribution.
+    Returns None if sample is too small."""
+
+    n_of_words = fdist.B()
+    nth = int(n_of_words * percentage)
+
+    if nth < 1:
+        nth = 1
+
+    words = fdist.most_common(nth)
+
+    if len(words) > 0:
+        return fdist[words[-1][0]]
+    else:
+        return None
+
+
+def get_common_word_threshold(fdist):
+    """Returns frequency threshold for a common word."""
+
+    threshold = get_word_frequency_at(fdist, COMMON_THRESH)
+    if threshold:
+        return threshold
+    else:
+        return 2
+
+
+def get_uncommon_word_threshold(fdist):
+    """Returns frequency threshold for an uncommon word."""
+
+    threshold = get_word_frequency_at(fdist, UNCOMMON_THRESH)
+    if threshold:
+        return threshold
+    else:
+        return 1
 
 
 def analyze_words(text, ordered=False):
@@ -60,18 +103,10 @@ def analyze_sentences(text):
     appearing in the sentence"""
 
     sent_tokens = sent_tokenize(text)
-
     fdist = get_fdist(text)
-    n_of_words = fdist.N()
 
-    # Get the frequency of the word at the top 25% of fdist
-    common_words = fdist.most_common(n_of_words // 4)
-    if len(common_words) > 0:
-        common_word_threshold = fdist[common_words[-1][0]]
-    else:
-        common_word_threshold = 1
-
-    uncommon_word_threshold = 2 # TODO: Get bottom 25% threshold
+    common_word_threshold = get_common_word_threshold(fdist)
+    uncommon_word_threshold = get_uncommon_word_threshold(fdist)
 
     result_dict = {}
 
@@ -81,9 +116,9 @@ def analyze_sentences(text):
         words = get_words(sentence, lower=True)
 
         for word in words:
-            if fdist[word] > common_word_threshold:
+            if fdist[word] >= common_word_threshold:
                 common_words.append(word)
-            if fdist[word] < uncommon_word_threshold:
+            elif fdist[word] <= uncommon_word_threshold:
                 uncommon_words.append(word)
 
         result_dict[sentence] = {

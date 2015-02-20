@@ -1,50 +1,77 @@
 {% extends 'layout.html' %}
+
+{% block lead_text %}
+Here are your results!
+{% endblock %}
+
 {% block body %}
-<h2>Sentence Length Variance</h2>
-<p>Score: <em>{{sent_variance}}</em></p>
-<p>The score indicates the average relative difference in the whole text between each sentence. A low value here might indicate a monotonous writing style.</p>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Sentence Length Variance</h2>
+        <p>Score: <strong>{{sent_variance}}</strong></p>
+        <p>The score indicates the average relative difference in the whole text between each sentence. A low value here might indicate a monotonous writing style.</p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Most Common Nouns</h2>
+        <p>
+            {{ common_nouns|join(", ") }}
+        </p>
+    </div>
+
+    <div class="col-md-4">
+        <h2>Most Common Adjectives</h2>
+        <p>
+            {{ common_adjectives|join(", ") }}
+        </p>
+    </div>
+</div>
 
 <h2>Sentence information</h2>
-<table class="results">
-<tr>
-    <th>Sentence</th>
-    <th>Length</th>
-    <th>Common words</th>
-    <th>Uncommon words</th>
-</tr>
-{% for sentence, result in sentence_results.items() %}
-<tr>
-    <td>{{sentence}}</td>
-    <td>{{result.length}}</td>
-    <td>
-        {% for word in result.common_words %}
-            {{word}}, 
-        {% endfor %}
-    </td>
-    <td>
-        {% for word in result.uncommon_words %}
-            {{word}}, 
-        {% endfor %}
-    </td>
-</tr>
-{% endfor %}
+<table class="table table-striped">
+<thead>
+    <tr>
+        <th>Sentence</th>
+        <th>Length</th>
+        <th>Common words</th>
+        <th>Uncommon words</th>
+    </tr>
+</thead>
+<tbody>
+    {% for sentence, result in sentence_results.items() %}
+    <tr>
+        <td>{{sentence}}</td>
+        <td>{{result.length}}</td>
+        <td>
+            {{ result.common_words|join(", ") }}
+        </td>
+        <td>
+            {{ result.uncommon_words|join(", ") }}
+        </td>
+    </tr>
+    {% endfor %}  
+</tbody>
 </table>
 <br/>
 
 <h2>Word frequencies</h2>
-<table class="results">
-<tr>
-	<th>Word</th>
-	<th>Count</th>
-	<th>Part of Speech</th>
-</tr>
-{% for word, result in results.items() %}
-<tr>
-	<td>{{word}}</td>
-	<td>{{result.count}}</td>
-	<td>{{result.pos_tag}}</td>
-</tr>
-{% endfor %}
+<table class="table table-striped">
+<thead>
+    <tr>
+        <th>Word</th>
+        <th>Count</th>
+        <th>Part of Speech</th>
+    </tr>
+</thead>
+<tbody>
+    {% for word, result in results.items() %}
+    <tr>
+        <td>{{word}}</td>
+        <td>{{result.count}}</td>
+        <td>{{result.pos_tag}}</td>
+    </tr>
+    {% endfor %}
+</tbody>
 </table>
 <br/>
 <a href="{{ url_for('index') }}">Back</a>

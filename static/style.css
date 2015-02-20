@@ -1,8 +1,6 @@
 textarea.text-to-tag {
 	width: 600px;
 	height: 120px;
-	border: 3px solid #cccccc;
-	padding: 5px;
 }
 
 table.results, table.results th, table.results td {

@@ -155,3 +155,15 @@ def analyze_text(text):
     # of sentence length variance.
     return numpy.mean(sentence_diffs)
 
+def get_most_common_by_pos(text, pos_tag, amount=5):
+    """Returns the most common words by POS-tag"""
+
+    all_tokens = analyze_words(text)
+    words = list(filter(lambda w: w[1]['pos_tag'] == pos_tag,
+        all_tokens.items()
+    ))
+
+    most_common = FreqDist([w for w, r in words]).most_common(amount)
+    
+    return [word for word, freq in most_common]
+

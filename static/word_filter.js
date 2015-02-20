@@ -2,6 +2,7 @@
 // results.
 
 $(document).ready(function() {
+    "use strict";
 
     var parseDataFromTable = function() {
         var dataSet = [];
@@ -75,7 +76,7 @@ $(document).ready(function() {
 
             if (selectedTag !== 'all') {
                 var filterFunc = function(data_el) {
-                    if (data_el.posTag == selectedTag) {
+                    if (data_el.posTag === selectedTag) {
                         return true;
                     }
                     return false;
